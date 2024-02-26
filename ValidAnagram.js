@@ -43,9 +43,15 @@ var isAnagram = function (s, t) {
         }
     }
 
+    console.log(obj1)
+    console.log(obj1[s[0]])
+
     return true;
 };
 
 s = "anagram", t = "nagaram"
+
+
+
 
 console.log(isAnagram(s, t));

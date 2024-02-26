@@ -71,7 +71,7 @@ var myAtoi = function (s) {
             }
             else {
 
-                if (s[i] != ' ' || count == 0) {
+                if (s[i] != ' ' || count == 1) {
                     count++
                 }
                 if (count > 1) {
@@ -96,10 +96,11 @@ var myAtoi = function (s) {
         return Math.pow(-2, 31)
     }
     return result;
+    
 };
 
 
-s = "  +  413"
+s = "  +413+"
 
 console.log(parseInt(s))
 

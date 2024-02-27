@@ -20,22 +20,19 @@ Explanation: "leeto" did not occur in "leetcode", so we return -1.
 var strStr = function (haystack, needle) {
 
     let index = -1;
-    let accrancecount = 0;
+    let accrancecount= true;
     if (haystack.length < needle.length) {
         return -1;
     }
     for (let i = 0; i < haystack.length; i++) {
-        let newindex = i;
-        accrancecount = 0;
+        accrancecount= true;
         for (let j = 0; j < needle.length; j++) {
-            if (haystack[newindex] == needle[j]) {
-                newindex++;
-                accrancecount++;
-            } else {
+            if (haystack[i+j] != needle[j]) {
+                accrancecount = false;
                 break;
-            }
+            } 
         }
-        if (accrancecount === needle.length) {
+        if (accrancecount) {
             return i;
         }
     }

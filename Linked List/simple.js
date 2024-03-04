@@ -41,14 +41,16 @@ class LinkedList {
             this.head.data = val2;
         } else {
             let currentNode = this.head;
-            while (currentNode != null) {
-                if (currentNode.data == val1) {
-                    currentNode.data = val2;
+            while (currentNode.next != null) {
+                if (currentNode.next.data == val1) {
+                    console.log('dsdsd');
+                    currentNode.next = currentNode.next.next; // Update the reference to skip the node with val1
                     break;
                 }
                 currentNode = currentNode.next;
             }
         }
+
     }
     // Middle of the Linked List
     MiddleLinkedlist() {
@@ -85,11 +87,11 @@ class LinkedList {
     //          newcurrnet = newcurrnet.next;
     //     }
     // }
-    revercelinkist(){
+    revercelinkist() {
         let current = this.head;
         let previous = null;
         let next = null;
-        while(current){
+        while (current) {
             next = current.next;
             current.next = previous;
             previous = current;
@@ -98,6 +100,29 @@ class LinkedList {
         this.head = previous;
         this.print();
     }
+
+    removeNthFromEnd(n) {
+        let lenght = 0;
+        let current = this.head;
+        while (current != null) {
+            current = current.next;
+            lenght++;
+        }
+        let index = (lenght - n) - 1;
+        let current1 = this.head;
+        let idx = 0;
+        while (current1 != null) {
+            if (idx == index) {
+                current1 = current1.next.next
+                delete current1.next;
+                break;
+            }
+            current1 = current1.next;
+        }
+        return this.head;
+
+    }
+
 
 
 
@@ -121,5 +146,6 @@ list.insert(5);
 list.insert(6);
 list.update(5, 10)
 // console.log(list.MiddleLinkedlist());
-list.revercelinkist();
-// list.print();
+// list.revercelinkist();
+// console.log(list.removeNthFromEnd(2));
+list.print();

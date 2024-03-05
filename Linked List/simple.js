@@ -90,15 +90,14 @@ class LinkedList {
     revercelinkist() {
         let current = this.head;
         let previous = null;
-        let next = null;
-        while (current) {
-            next = current.next;
-            current.next = previous;
+        let next = this.head.next;
+        while (current.next) {
+            current.next  = previous;
             previous = current;
             current = next;
+            next  = next.next
         }
         this.head = previous;
-        this.print();
     }
 
     removeNthFromEnd(n) {
@@ -120,7 +119,6 @@ class LinkedList {
             current1 = current1.next;
         }
         return this.head;
-
     }
 
 
@@ -144,8 +142,8 @@ list.insert(3);
 list.insert(4);
 list.insert(5);
 list.insert(6);
-list.update(5, 10)
+// list.update(5, 10)
 // console.log(list.MiddleLinkedlist());
-// list.revercelinkist();
+list.revercelinkist();
 // console.log(list.removeNthFromEnd(2));
 list.print();

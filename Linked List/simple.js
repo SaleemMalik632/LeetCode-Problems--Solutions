@@ -81,7 +81,7 @@ class LinkedList {
             current = next;
             next = next.next
         }
-        this.head = previous;
+        return previous;
     }
     mergetwosorttedlist(list1, list2) {
         let current1 = list1;
@@ -136,12 +136,37 @@ class LinkedList {
         //     if (listval[i] != listval[right]) {
         //         return false;
         //     }
-        //     right--;
+        //     right--; 
         // }
         // return true;
+        let slow = this.head;
+        let fast = this.head;
+        while (fast != null && fast.next !== null  ) { 
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        let reverceSecodeMiddle = this.revercelinkist1(slow);
+        let temp = this.head;
+        while (reverceSecodeMiddle) {
+            if (temp.data != reverceSecodeMiddle.data) {
+                return false;
+            }
+            reverceSecodeMiddle = reverceSecodeMiddle.next;
+            temp = temp.next;
+        }
+        return true;
+    }
+    revercelinkist1(head) { 
+        let current = head;
+        let previous = null;
+        while (current) {
+            let temp = current.next;
+            current.next = previous;
+            previous = current
+            current = temp;
 
-        
-
+        }
+        return previous;
     }
 
 

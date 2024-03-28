@@ -113,15 +113,34 @@ class BinaryTree {
                 return root.value;
             }
             root = root.left;
-        } 
+        }
         return null;
     }
-    kthLargestLevelSum(root,k){
+    kthLargestLevelSum(root, k) {
         if (!root) {
-            
+            return null
         }
+        let q = [];
+        q.push(root);
+        q.push(null);
+        let array = [];
+        let result = 0;
+        while (q.length > 0) {
+            let currentNode = q.shift();
+            if (currentNode != null) {
+                result = result + currentNode.value;
+                if (currentNode.left) { q.push(currentNode.left) }
+                if (currentNode.right) { q.push(currentNode.right) }
+            } else {
+                array.push(result);
+                result = 0;
+                if (q.length > 0) { q.push(null) }
+            }
+        }
+        array.sort((a, b) => a - b)
+        return array[array.length-k];
     }
-    
+
 }
 
 
@@ -137,10 +156,11 @@ tree.insert(12);
 tree.insert(18);
 tree.insert(19);
 console.log(tree.printtree(tree.root))
-console.log(tree.depthOfTree(tree.root));
+// console.log(tree.depthOfTree(tree.root));
 // console.log(tree.isValidBST(tree.root, null, null));
-console.log(tree.atrativeisValidBST(tree.root));
-console.log(tree.kmaximumElement(tree.root,1));
+// console.log(tree.atrativeisValidBST(tree.root));
+// console.log(tree.kmaximumElement(tree.root, 1));
+console.log(tree.kthLargestLevelSum(tree.root, 2))
 
 
 

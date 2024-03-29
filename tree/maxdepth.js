@@ -138,7 +138,34 @@ class BinaryTree {
             }
         }
         array.sort((a, b) => a - b)
-        return array[array.length-k];
+        console.log(array)
+        return array[array.length - k];
+    }
+    maxLevelSum(root) {
+        if (!root) {
+            return null;
+        }
+        let q = [];
+        let sum = 0;
+        let max = 0;
+        let level = 0;
+        q.push(root);
+        while (q.length > 0) {
+            let lavelnumber = q.length;
+            while (lavelnumber > 0) {
+                let currentnode = q.shift();
+                sum = sum + currentnode.value;
+                if (currentnode.left) { q.push(currentnode.left); }
+                if (currentnode.right) { q.push(currentnode.right); }
+                lavelnumber--;
+            }
+            if (sum > max) {
+                max = sum;
+                sum = 0;
+                level = level + 1
+            }
+        }
+        return level;
     }
 
 }
@@ -160,7 +187,8 @@ console.log(tree.printtree(tree.root))
 // console.log(tree.isValidBST(tree.root, null, null));
 // console.log(tree.atrativeisValidBST(tree.root));
 // console.log(tree.kmaximumElement(tree.root, 1));
-console.log(tree.kthLargestLevelSum(tree.root, 2))
+console.log(tree.kthLargestLevelSum(tree.root, 3))
+console.log(tree.maxLevelSum(tree.root));
 
 
 

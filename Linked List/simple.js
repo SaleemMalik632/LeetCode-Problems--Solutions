@@ -49,27 +49,16 @@ class LinkedList {
                 currentNode = currentNode.next;
             }
         }
-
     }
     // Middle of the Linked List
     MiddleLinkedlist() {
-        // let slow = this.head;
-        // let fast = this.head;
-        // while (fast.next !== null && fast != null) {
-        //     slow = slow.next;
-        //     fast = fast.next.next;
-        // }
-        // return slow.data;
-        let lenght = 0;
-        let currentNode = this.head;
-        let arry = []
-        while (currentNode) {
-            arry.push(currentNode.data)
-            currentNode = currentNode.next;
-            lenght++
+        let slow = this.head;
+        let fast = this.head;
+        while (fast != null && fast.next !== null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        console.log(arry[Math.floor((lenght / 2))])
-        return Math.ceil((lenght / 2))
+        return slow.data;
     }
     revercelinkist() {
         let current = this.head;
@@ -84,25 +73,29 @@ class LinkedList {
         return previous;
     }
     mergetwosorttedlist(list1, list2) {
+        let dummy = new LinkedList();
+        let current = dummy;
         let current1 = list1;
         let current2 = list2;
-        let list = new Node();
-        while (current1.next) {
-            let data = current1.data;
-            console.log(data)
-            while (current2.next) {
-                if (current2.data < data) {
-                    data = current2.data
-                }
+        while (current1 && current2) {
+            if (current1.val < current2.val) {
+                current.next = current1;
+                current1 = current1.next;
+            } else {
+                current.next = current2;
                 current2 = current2.next;
             }
-            let node = new Node(data);
-            list.next = node;
-            current1 = current1.next;
+            current = current.next;
         }
-        return list;
-    }
 
+        if (current1) {
+            current.next = current1;
+        }
+        if (current2) {
+            current.next = current2;
+        }
+        return dummy.next;
+    }
     removeNthFromEnd(n) {
         let lenght = 0;
         let current = this.head;
@@ -123,7 +116,6 @@ class LinkedList {
         }
         return this.head;
     }
-
     isPalindrome() {
         // let current = this.head;
         // let listval = [] 
@@ -141,7 +133,7 @@ class LinkedList {
         // return true;
         let slow = this.head;
         let fast = this.head;
-        while (fast != null && fast.next !== null  ) { 
+        while (fast != null && fast.next !== null) {
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -156,7 +148,7 @@ class LinkedList {
         }
         return true;
     }
-    revercelinkist1(head) { 
+    revercelinkist1(head) {
         let current = head;
         let previous = null;
         while (current) {
@@ -169,7 +161,19 @@ class LinkedList {
         return previous;
     }
 
-
+    hascycle() {
+        let slow = this.head;
+        let fast = this.head;
+        while (fast != null && fast.next !== null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 
 
     print() {
